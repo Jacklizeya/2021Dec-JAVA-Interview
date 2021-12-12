@@ -27,6 +27,8 @@ public class Dijkstra {
                 if (alternate < distances.get(neighborValue)){
                     distances.put(neighborValue, alternate);
                     previous.put(neighborValue, current);
+                    
+                    // My question is how do we deal with duplicates???
                     queue.add(new QueueObject(e.getEnd(), distances.get(neighborValue)));
                 }
             }
