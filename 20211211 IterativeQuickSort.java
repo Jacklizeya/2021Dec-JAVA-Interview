@@ -1,36 +1,44 @@
-// Partition will return the place left smaller and right bigger
+import java.util.Arrays;
+
+public class MergeSort {
+
+    public int[] sort(int arr[]) {
+        int length = arr.length;
+        if (length <= 1) {
+            return arr;
+        }
+        int mid = Math.floorDiv(length, 2);
+        // int[] leftArray = Arrays.copyOfRange(arr, 0, mid);
+        // int[] rightArray = Arrays.copyOfRange(arr, mid, length);
+        return merge(sort( Arrays.copyOfRange(arr, 0, mid)), sort(Arrays.copyOfRange(arr, mid, length)));
+    }
+
+    public int[] merge(int left[], int[] right) {
+        int[] merged = new int[left.length + right.length];
+        int leftPos = 0;
+        int rightPos = 0;
+        int curIndex = 0;
+
+        while (leftPos < left.length && rightPos < right.length) {
+            if (left[leftPos] < right[rightPos]) {
+                merged[curIndex] = left[leftPos];
+                leftPos++;
+            } else {
+                merged[curIndex] = right[rightPos];
+                rightPos++;
+            }
+            curIndex++;
+        }
+
+        System.arraycopy(left, leftPos, merged, curIndex, left.length - leftPos);
+        System.arraycopy(right, rightPos, merged, curIndex, right.length - rightPos);
+        return merged;
+    }
 
 
-public int partition(int[] arr, int leftPointer, int rightPointer) {
-  int pivot = arr[Math.floorDiv((leftPointer + rightPointer), 2)];
- 
-  while (leftPointer < rightPointer) {
-    while (arr[leftPointer] < pivot) {
-      leftPointer++;
+    public static void main (String[] args) {
+        int[] inputArr = {3, 5, 2, 90, 4, 7};
+        MergeSort sorter = new MergeSort();
+        System.out.println(Arrays.toString(sorter.sort(inputArr)));
     }
-    while (arr[rightPointer] > pivot) {
-      rightPointer--;
-    }
-    if (leftPointer < rightPointer) {
-      swap(arr, leftPointer, rightPointer);
-    }
-  }
-  return leftPointer;
 }
-
-
-public int[] quickSort(int[] arr, int start, int end) {
-    if (end > start) {
-    int partition = partition(arr, start, end);
-    // recurse on left partition
-      if (start < partition) {
-      quickSort(arr, start, partition);
-    }
-    // recurse on right partition
-    if (partition + 1 < end) {
-      quickSort(arr, partition + 1, end);
-    }
-  }
-  return arr;
-}
- 
