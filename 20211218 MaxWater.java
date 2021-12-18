@@ -10,7 +10,7 @@ public class RainWater {
       int rightBound = 0;
       // Fill in the rest of this method with your solution
       while (leftPointer < rightPointer) {
-          if (heights[leftPointer] < heights[rightPointer]) {
+          if (heights[leftPointer] <= heights[rightPointer]) {
             leftBound = Math.max(heights[leftPointer], leftBound);
             totalWater += leftBound - heights[leftPointer];
             leftPointer++;
