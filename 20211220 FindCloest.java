@@ -10,6 +10,7 @@ class Program {
 		// The Logic: if the middle is better, use the middle
 		// If it has children, try the children too
 		// Recursive Call stack use log(n) space
+		// pass the closest number from last level into NEXT level
 		if (Math.abs( tree.value - target) < Math.abs(closestNumber - target)) {closestNumber = tree.value;}
 		if (target < tree.value) {
 			if (tree.left != null) {closestNumber = DFS(tree.left, target, closestNumber);}
