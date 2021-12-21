@@ -43,8 +43,6 @@ class Program {
 // A simplified version
 // Add first
 // Then continue
-
-// remove tail for path
 // no need to do anything for value
 
 
