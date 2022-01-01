@@ -69,23 +69,35 @@ class Program {
 			if (this.right == null) {
 					if (this.left != null) {
 						// parentNode -> this -> this.left, upgrade this.left
-						if (parentNode != null && parentNode.left == this) {parentNode.left = this.left;}
-						else {parentNode.right = this.left;}
+						// if (parentNode != null && parentNode.left == this) {parentNode.left = this.left;}
+						// else if (parentNode != null && parentNode.right == this) {parentNode.right = this.left;}
+						this.value = this.left.value;
+						this.right = this.left.right;
+						this.left = this.left.left;
 					} else {
-						// this doesnot have left and right, this = null
-						if (parentNode != null && parentNode.left == this) {parentNode.left = null;}
-						else {parentNode.right = null;}
+						// this doesnot have left and right, this = null?
+						// if (parentNode != null && parentNode.left == this) {parentNode.left = null;}
+						// else {parentNode.right = null;}
+						if (parentNode == null) {
+							// do not do anything, parent is null, and I donot have children
+						} else {
+								if (parentNode.left == this) {parentNode.left = null;}
+								else {parentNode.right = null;}
+						}
 					}
 				}
 			// The follwing is based on this has right branch
 			else {
-				// if this.right has no left branch, this.right will be upgraded to this's level
+				// this.right != null, this has right branch
 				if (this.right.left == null) {
-					this.right.left = this.left;
-					if (parentNode != null && parentNode.left == this) {
-						parentNode.left = this.right;
-					}
-					else {parentNode.right = this.right;}
+					// if this.right has no left branch, this.right will be upgraded to this's level
+					// this.right.left = this.left;
+					// if (parentNode != null && parentNode.left == this) {
+					// 	parentNode.left = this.right;
+					// }
+					// else if (parentNode != null && parentNode.right == this) {parentNode.right = this.right;}
+					this.value = this.right.value;
+					this.right = this.right.right;
 				} else {
 					// this has left branch 
 					BST parent = this.right;
